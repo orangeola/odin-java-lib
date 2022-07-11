@@ -27,6 +27,7 @@ function display() {
         let dAuthor = document.createElement("p");
         let dPages = document.createElement("p");
         let dRead = document.createElement("p");
+        dRead.setAttribute("class","readOrNot");
 
         let removeButton = document.createElement("button");
         removeButton.innerText = "Remove";
@@ -39,6 +40,17 @@ function display() {
 
         let readButton = document.createElement("button");
         readButton.innerText = "Change Read Status";
+
+        readButton.addEventListener('click', ()=> {
+            let bool = document.getElementsByClassName("readOrNot")[newBook.dataset.index];
+            myLibrary[newBook.dataset.index].read = !myLibrary[newBook.dataset.index].read;
+            if(bool.innerText === "false")
+            {
+                bool.innerText = "true";
+            } else {
+                bool.innerText = "false";
+            }
+        });
 
         dTitle.innerText = myLibrary[i].title;
         newBook.appendChild(dTitle);
