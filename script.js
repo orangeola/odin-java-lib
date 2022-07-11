@@ -13,6 +13,7 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
+
     myLibrary.push(newBook);
     display();
 }
@@ -21,11 +22,23 @@ function display() {
     container.innerHTML = "";
     for(let i = 0; i < myLibrary.length; i++) {
         let newBook = document.createElement("div");
+        newBook.dataset.index = i;
         let dTitle = document.createElement("p");
         let dAuthor = document.createElement("p");
         let dPages = document.createElement("p");
         let dRead = document.createElement("p");
+
         let removeButton = document.createElement("button");
+        removeButton.innerText = "Remove";
+
+        removeButton.addEventListener('click', ()=> {
+            newBook.remove();
+            updateIndex(newBook.dataset.index);
+            myLibrary.splice(newBook.dataset.index, 1);
+        });
+
+        let readButton = document.createElement("button");
+        readButton.innerText = "Change Read Status";
 
         dTitle.innerText = myLibrary[i].title;
         newBook.appendChild(dTitle);
@@ -40,6 +53,7 @@ function display() {
         newBook.appendChild(dRead);
 
         newBook.appendChild(removeButton);
+        newBook.appendChild(readButton);
         container.appendChild(newBook);  
     }
 }
@@ -66,4 +80,15 @@ function show()
 {
     const boxContainer = document.getElementById('newBookContainer');
     boxContainer.style.display = 'flex';
+}
+
+function updateIndex(toDelete)
+{
+    for(let i = parseInt(toDelete) + 1; i<myLibrary.length; i++)
+    {
+        console.log(i);
+        console.log(myLibrary[i]);
+        const el1 = document.querySelector(`[data-index="${i}"]`);
+        el1.dataset.index = i-1;
+    }
 }
