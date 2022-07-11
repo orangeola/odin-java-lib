@@ -12,7 +12,7 @@
     <div id="newBookContainer">
         <div id="newBook">
             <h1>Add Book</h1>
-            <form id="bookForm" onsubmit="addBookToLibrary() & hide(); return false;">
+            <form id="bookForm" onsubmit="addBookToLibrary(title.value, author.value, pages.value, read.checked) & hide(); return false;">
                 <input type="text" id="title" name="title"  placeholder="Title" required><br>
                 <input type="text" id="author" name="author" placeholder="Author" required>
                 <input type="number" id="pages" name="pages" placeholder="Pages" min="0" required>
@@ -24,7 +24,7 @@
             </form>
         </div>
     </div>
-    <button id="test">Add</button>
+    <button id="addBookPopup">Add</button>
     <div id="container"></div>
 </body>
 </html>
