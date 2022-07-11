@@ -10,6 +10,27 @@ body {
     padding:0;
  }
 
+ html, body { height: 100%; }
+
  .container {
     display: flex;
+ }
+
+ #newBookContainer {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.4);
+
+   display: none;
+   justify-content: center;
+   align-items: center;
+ }
+
+ #newBook {
+   height: 200px;
+   width: 200px;
+   background-color: white;
+   text-align: center;
+   border-radius: 15px;
  }

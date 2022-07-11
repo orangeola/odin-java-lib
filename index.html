@@ -9,9 +9,22 @@
     <script src="script.js" async></script> 
 </head>
 <body>
-    <button id="test">Add</button>
-    <div id="container">
-        
+    <div id="newBookContainer">
+        <div id="newBook">
+            <h1>Add Book</h1>
+            <form id="bookForm" onsubmit="addBookToLibrary() & hide(); return false;">
+                <input type="text" id="title" name="title"  placeholder="Title" required><br>
+                <input type="text" id="author" name="author" placeholder="Author" required>
+                <input type="number" id="pages" name="pages" placeholder="Pages" min="0" required>
+                <label for="read">Read?</label>
+                <input type="checkbox" id="read" name="read">
+                <div>
+                    <input type="submit" value="Submit"/>
+                </div>
+            </form>
+        </div>
     </div>
+    <button id="test">Add</button>
+    <div id="container"></div>
 </body>
 </html>
