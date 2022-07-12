@@ -42,11 +42,11 @@ function displayOne(index) {
         readButton.addEventListener('click', ()=> {
             let bool = document.getElementsByClassName("readOrNot")[newBook.dataset.index];
             myLibrary[newBook.dataset.index].read = !myLibrary[newBook.dataset.index].read;
-            if(bool.innerText === "false")
+            if(bool.innerText === "Not Read")
             {
-                bool.innerText = "true";
+                bool.innerText = "Read";
             } else {
-                bool.innerText = "false";
+                bool.innerText = "Not Read";
             }
         });
 
@@ -60,10 +60,16 @@ function displayOne(index) {
         newBook.appendChild(dPages);
 
         dRead.innerText = myLibrary[index].read;
+        if(dRead.innerText === "true"){
+            dRead.innerText = "Read";
+        } else {
+            dRead.innerText = "Not Read";
+        }
         newBook.appendChild(dRead);
 
         newBook.appendChild(removeButton);
         newBook.appendChild(readButton);
+        newBook.classList.add("card");
         container.appendChild(newBook);
 }
 
