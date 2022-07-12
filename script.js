@@ -14,8 +14,35 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
 
-    myLibrary.push(newBook);
-    displayOne(myLibrary.length-1);
+    if(myLibrary.length === 0){
+        console.log(newBook.title);
+        myLibrary.push(newBook);
+        displayOne(myLibrary.length-1);
+        hide();
+    }
+    else 
+    {
+        for(let i = 0; i < myLibrary.length; i++)
+        {
+            if(newBook.title === myLibrary[i].title && newBook.author === myLibrary[i].author)
+            {
+                console.log(newBook.title);
+                console.log(myLibrary[i].title);
+                const form = document.getElementById("title");
+                form.classList.add("bookExists");
+                break;
+            } 
+            else if(i === myLibrary.length-1)
+            {
+                myLibrary.push(newBook);
+                displayOne(myLibrary.length-1);
+                hide();
+                break;
+            }
+        }
+    }
+    //myLibrary.push(newBook);
+    //displayOne(myLibrary.length-1);
 }
 
 function displayOne(index) {
@@ -73,60 +100,6 @@ function displayOne(index) {
         container.appendChild(newBook);
 }
 
-/*
-function display() {
-    container.innerHTML = "";
-    for(let i = 0; i < myLibrary.length; i++) {
-        let newBook = document.createElement("div");
-        newBook.dataset.index = i;
-        let dTitle = document.createElement("p");
-        let dAuthor = document.createElement("p");
-        let dPages = document.createElement("p");
-        let dRead = document.createElement("p");
-        dRead.setAttribute("class","readOrNot");
-
-        let removeButton = document.createElement("button");
-        removeButton.innerText = "Remove";
-
-        removeButton.addEventListener('click', ()=> {
-            newBook.remove();
-            updateIndex(newBook.dataset.index);
-            myLibrary.splice(newBook.dataset.index, 1);
-        });
-
-        let readButton = document.createElement("button");
-        readButton.innerText = "Change Read Status";
-
-        readButton.addEventListener('click', ()=> {
-            let bool = document.getElementsByClassName("readOrNot")[newBook.dataset.index];
-            myLibrary[newBook.dataset.index].read = !myLibrary[newBook.dataset.index].read;
-            if(bool.innerText === "false")
-            {
-                bool.innerText = "true";
-            } else {
-                bool.innerText = "false";
-            }
-        });
-
-        dTitle.innerText = myLibrary[i].title;
-        newBook.appendChild(dTitle);
-
-        dAuthor.innerText = myLibrary[i].author;
-        newBook.appendChild(dAuthor);
-
-        dPages.innerText = myLibrary[i].pages;
-        newBook.appendChild(dPages);
-
-        dRead.innerText = myLibrary[i].read;
-        newBook.appendChild(dRead);
-
-        newBook.appendChild(removeButton);
-        newBook.appendChild(readButton);
-        container.appendChild(newBook);  
-    }
-}
-*/
-
 document.addEventListener('click', function handleClickOutsideBox(event) {
     const box = document.getElementById('newBook');
   
@@ -143,6 +116,7 @@ function hide()
     const boxContainer = document.getElementById('newBookContainer');
     boxContainer.style.display = 'none';
     document.forms['bookForm'].reset()
+    bookAlreadyExists();
 }
 
 function show()
@@ -160,4 +134,10 @@ function updateIndex(toDelete)
         const el1 = document.querySelector(`[data-index="${i}"]`);
         el1.dataset.index = i-1;
     }
+}
+
+function bookAlreadyExists()
+{
+    const form = document.getElementById("title");
+    form.classList.remove("bookExists");
 }

@@ -21,7 +21,7 @@ body, p {
  }
 
  #newBook {
-   height: 200px;
+   height: 230px;
    width: 300px;
    background-color: white;
    text-align: center;
@@ -70,4 +70,19 @@ body, p {
   align-items: center;
   gap: 10px;
   font-size: 20px;
+ }
+
+
+ input + span {
+   position: relative;
+     }
+
+ .bookExists + span:before {
+   font-size: 15px;
+   bottom: 25px;
+   right: -9px;
+   position: absolute;
+   content: "Book already in library!";
+   color: darkred;
+   width: 200px;
  }
