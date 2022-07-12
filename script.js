@@ -15,9 +15,59 @@ function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
 
     myLibrary.push(newBook);
-    display();
+    displayOne(myLibrary.length-1);
 }
 
+function displayOne(index) {
+    let newBook = document.createElement("div");
+        newBook.dataset.index = index;
+        let dTitle = document.createElement("p");
+        let dAuthor = document.createElement("p");
+        let dPages = document.createElement("p");
+        let dRead = document.createElement("p");
+        dRead.setAttribute("class","readOrNot");
+
+        let removeButton = document.createElement("button");
+        removeButton.innerText = "Remove";
+
+        removeButton.addEventListener('click', ()=> {
+            newBook.remove();
+            updateIndex(newBook.dataset.index);
+            myLibrary.splice(newBook.dataset.index, 1);
+        });
+
+        let readButton = document.createElement("button");
+        readButton.innerText = "Change Read Status";
+
+        readButton.addEventListener('click', ()=> {
+            let bool = document.getElementsByClassName("readOrNot")[newBook.dataset.index];
+            myLibrary[newBook.dataset.index].read = !myLibrary[newBook.dataset.index].read;
+            if(bool.innerText === "false")
+            {
+                bool.innerText = "true";
+            } else {
+                bool.innerText = "false";
+            }
+        });
+
+        dTitle.innerText = myLibrary[index].title;
+        newBook.appendChild(dTitle);
+
+        dAuthor.innerText = myLibrary[index].author;
+        newBook.appendChild(dAuthor);
+
+        dPages.innerText = myLibrary[index].pages;
+        newBook.appendChild(dPages);
+
+        dRead.innerText = myLibrary[index].read;
+        newBook.appendChild(dRead);
+
+        newBook.appendChild(removeButton);
+        newBook.appendChild(readButton);
+        container.appendChild(newBook);
+}
+
+/*
 function display() {
     container.innerHTML = "";
     for(let i = 0; i < myLibrary.length; i++) {
@@ -69,6 +119,7 @@ function display() {
         container.appendChild(newBook);  
     }
 }
+*/
 
 document.addEventListener('click', function handleClickOutsideBox(event) {
     const box = document.getElementById('newBook');
