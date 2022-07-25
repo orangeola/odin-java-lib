@@ -12,7 +12,7 @@
     <div id="newBookContainer">
         <div id="newBook">
             <h1>Add Book</h1>
-            <form id="bookForm" onsubmit="addBookToLibrary(title.value, author.value, pages.value, read.checked); return false;">
+            <form id="bookForm" onsubmit="addBook(title.value, author.value, pages.value, read.checked); return false;">
                 <input type="text" id="title" name="title"  placeholder="Title" maxlength="100" required>
                 <span></span>
                 <input type="text" id="author" name="author" placeholder="Author" maxlength="100" required>
