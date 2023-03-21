@@ -14,6 +14,16 @@ class Book{
 const Library = class {
     myLibrary = [];
 
+    checkOnInit(){
+        if(localStorage.getItem("lib")){
+            this.myLibrary = JSON.parse(localStorage.getItem("lib"));
+            for(let i = 0; i < this.myLibrary.length; i++){
+                this.displayOne(i);
+            }
+            //this.displayOne(this.myLibrary.length-1);
+        }
+    }
+
     addBookToLibrary(title, author, pages, read) {
         let newBook = new Book(title, author, pages, read);
     
@@ -44,6 +54,7 @@ const Library = class {
                 }
             }
         }
+        localStorage.setItem("lib", JSON.stringify(this.myLibrary));
     }
 
     displayOne(index) {
@@ -62,6 +73,7 @@ const Library = class {
                 newBook.remove();
                 this.updateIndex(newBook.dataset.index);
                 this.myLibrary.splice(newBook.dataset.index, 1);
+                localStorage.setItem("lib", JSON.stringify(this.myLibrary));
             });
     
             let readButton = document.createElement("button");
@@ -76,15 +88,16 @@ const Library = class {
                 } else {
                     bool.innerText = "Not Read";
                 }
+                localStorage.setItem("lib", JSON.stringify(this.myLibrary));
             });
-    
-            dTitle.innerText = this.myLibrary[index].title;
+            
+            dTitle.innerText = "Title: " + this.myLibrary[index].title;
             newBook.appendChild(dTitle);
     
-            dAuthor.innerText = this.myLibrary[index].author;
+            dAuthor.innerText = "Author: " +this.myLibrary[index].author;
             newBook.appendChild(dAuthor);
     
-            dPages.innerText = this.myLibrary[index].pages;
+            dPages.innerText = "Pages: " + this.myLibrary[index].pages;
             newBook.appendChild(dPages);
     
             dRead.innerText = this.myLibrary[index].read;
@@ -115,6 +128,7 @@ const Library = class {
 }
 
 const newLib = new Library();
+newLib.checkOnInit();
 
 function addBook(title, author, pages, read){
     newLib.addBookToLibrary(title, author, pages, read);
